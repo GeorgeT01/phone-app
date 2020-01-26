@@ -3,13 +3,13 @@
 
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/colorRedDark"/>
+            <solid android:color="@color/colorBlue"/>
         </shape>
     </item>
 
 
     <item
-        android:drawable="@drawable/ic_backspace"
+        android:drawable="@drawable/ic_content_copy"
         android:bottom="27dp"
         android:left="27dp"
         android:right="27dp"

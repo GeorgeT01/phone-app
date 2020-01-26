@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -25,16 +26,17 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero, btnAsterisk, btnHashtag, backspaceBtn, dialBtn;
+    private Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero, btnAsterisk, btnHashtag, backspaceBtn, copyBtn, dialBtn;
     private TextView phoneNumber;
     private Intent callIntent;
-    String phoneNumberString;
+    private String phoneNumberString;
+    private Context context;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        context = this;
         btnOne = findViewById(R.id.btnOne);
         btnTwo = findViewById(R.id.btnTwo);
         btnThree = findViewById(R.id.btnThree);
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnAsterisk = findViewById(R.id.btnAsterisk);
         btnHashtag = findViewById(R.id.btnHashtag);
         backspaceBtn = findViewById(R.id.backspaceBtn);
+        copyBtn = findViewById(R.id.copyBtn);
         dialBtn = findViewById(R.id.dialBtn);
         phoneNumber = findViewById(R.id.phoneNumber);
         phoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher()); // phone number formatting
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 //phoneNumber.append("1");
             }
         });
-
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 phoneNumber.setText(phoneNumber.getText().toString() + "2");
             }
         });
-
         btnThree.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 phoneNumber.setText(phoneNumber.getText().toString() + "3");
             }
         });
-
         btnFour.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -193,8 +193,11 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(phoneNumber.getText().toString().isEmpty()){
                     backspaceBtn.setVisibility(View.INVISIBLE);
+                    copyBtn.setVisibility(View.INVISIBLE);
+
                 }else{
                     backspaceBtn.setVisibility(View.VISIBLE);
+                    copyBtn.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -208,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 phoneNumber.setText("");
                 return false;
+            }
+        });
+        copyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClipboard(context, phoneNumber.getText().toString());
             }
         });
        // phoneNumber.addTextChangedListener();
@@ -228,8 +237,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private View.OnTouchListener otl = new View.OnTouchListener() {
+        @SuppressLint("ClickableViewAccessibility")
         public boolean onTouch (View v, MotionEvent event) {
             return true; // the listener has consumed the event
         }
     };
+
+    private void setClipboard(Context context, String text) {
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+        assert clipboard != null;
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(context, "Phone number Copied", Toast.LENGTH_SHORT).show();
+    }
 }
