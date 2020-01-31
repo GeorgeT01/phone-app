@@ -10,8 +10,8 @@
 
     <item
         android:drawable="@drawable/ic_hashtag"
-        android:bottom="30dp"
-        android:left="30dp"
-        android:right="30dp"
-        android:top="30dp"/>
+        android:bottom="28dp"
+        android:left="28dp"
+        android:right="28dp"
+        android:top="28dp"/>
 </layer-list>

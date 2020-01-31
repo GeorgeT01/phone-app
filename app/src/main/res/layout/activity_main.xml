@@ -26,6 +26,7 @@
                 android:maxLines="1"
                 android:autoSizeStepGranularity="2sp"
                 android:textColor="@color/colorBlack"
+                android:fontFamily="@font/montserrat"
                 tools:ignore="UnusedAttribute" />
 
         <LinearLayout
@@ -234,7 +235,8 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/dail_button_layer_list"
                 android:gravity="center"
-                app:fontFamily="@font/montserrat" />
+                app:fontFamily="@font/montserrat"
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/backspaceBtn"
                 android:layout_width="75dp"
@@ -245,7 +247,8 @@
                 app:fontFamily="@font/montserrat"
                 android:textSize="30sp"
                 android:visibility="invisible"
-                android:textColor="@color/colorBlack"  />
+                android:textColor="@color/colorBlack"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 

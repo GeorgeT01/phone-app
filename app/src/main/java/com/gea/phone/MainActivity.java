@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Uri number = Uri.parse("tel:"+phoneNumber.getText().toString());
                 callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + phoneNumber.getText().toString()));
+                callIntent.setData(Uri.parse("tel:" + Uri.encode(phoneNumber.getText().toString())));
                 if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MainActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE},
