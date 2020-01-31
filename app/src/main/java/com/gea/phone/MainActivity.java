@@ -248,6 +248,6 @@ public class MainActivity extends AppCompatActivity {
         android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
         assert clipboard != null;
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(context, "Phone number Copied", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Copied to clipboard.", Toast.LENGTH_SHORT).show();
     }
 }
